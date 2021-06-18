@@ -1,0 +1,15 @@
+---
+- name: 'install memcached'
+  apt:
+    update_cache: yes
+    name:
+      - memcached
+      - libmemcached-tools
+    state: present
+
+- name: 'restart memcached'  
+  systemd: 
+    state: started
+    enabled: yes
+    name: memcached
+# tasks file for roles/memcached

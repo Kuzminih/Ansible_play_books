@@ -1,0 +1,40 @@
+---
+
+#- name: Run the equivalent of "apt-get update" as a separate step
+#  apt:
+#    update_cache: yes
+
+#- name: Upgrade the OS (apt-get dist-upgrade)
+#  apt:
+#    upgrade: dist
+
+- name: 'Install packages'
+  apt:
+    update_cache: yes
+    name: nginx
+    state: present
+
+- name: 'Start nginx server'
+  systemd:
+    name: nginx
+    state: started
+    enabled: true
+
+#- name: 'Copy sites files'
+#  files:
+#    src: '{{path_to_site_folders}}'
+#    dest: '{{path_to_site_folders_on_work_host}}'
+#  tags:
+#    - config
+#    - index
+
+#- name: 'Copy def conf'
+#  files:
+#    src: '{{path_to_config_folders}}'
+#    dest: /etc/nginx/conf.d/{{server_name}}
+#  notify: 'reload_nginx'
+
+#- name: 'Check that web site'
+#  uri: http://localhost
+#  register: website
+#  failed_when: website.status != 200

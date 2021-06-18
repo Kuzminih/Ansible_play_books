@@ -1,0 +1,4 @@
+---
+# handlers file for roles/nginx
+- name: 'reload_nginx'
+  shell: 'nginx -t && nginx -s reload'

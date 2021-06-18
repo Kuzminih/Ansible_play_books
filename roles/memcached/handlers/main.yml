@@ -1,0 +1,7 @@
+---
+- name: 'restart memcached'
+  systemd:
+    name: 
+    - memcached
+    state: restart
+# handlers file for roles/memcached
