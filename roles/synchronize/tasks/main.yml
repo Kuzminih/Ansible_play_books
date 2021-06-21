@@ -20,3 +20,10 @@
 
 - name: 'Synchronization php config files'
   synchronize:
+      src: '{{ from_host }}/etc/redis.conf'
+    dest: '{{ target_host }}/etc/redis.conf'
+
+- name: 'Synchronization config files mysql'
+  synchronize:
+    src: '{{ from_host }}/etc/my.cnf'
+    dest: '{{ target_host }}/etc/mycnf.d'
