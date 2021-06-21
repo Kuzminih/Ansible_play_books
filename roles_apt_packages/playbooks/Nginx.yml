@@ -2,11 +2,13 @@
 - name: 'Install Nginx'
   hosts: web
   roles:
-##    - nginx
+    - nginx
     - php-fpm71
 #    - php-fpm74
-##    - memcached
+    - memcached
     - mysql57
+#    - geerlingguy.mysql
+    - perconadb
 #    - redis
 #    - email_queue
 #    - itsumma_main_queue

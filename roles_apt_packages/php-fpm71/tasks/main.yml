@@ -11,8 +11,8 @@
     state: present
 
 - name: 'install'
-  command: add-apt-repository ppa:ondrej/php
+  command: add-apt-repository ppa:ondrej/php -y
 
-# - name: 'Install php-fpm71'
-#  apt:
-#    name: php-fpm7.1
+- name: 'Install php-fpm71'
+  apt:
+   name: php7.1-fpm

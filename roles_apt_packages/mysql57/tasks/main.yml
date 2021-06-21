@@ -1,0 +1,5 @@
+---
+- name: 'install repo for mysql57'
+  get_url:
+    -  
+# tasks file for roles/mysql57

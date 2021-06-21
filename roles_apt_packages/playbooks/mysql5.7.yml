@@ -1,0 +1,15 @@
+/etc/apt/trusted.gpg
+--------------------
+pub   dsa1024 2003-02-03 [SCA] [expires: 2022-02-16]
+      A4A9 4068 76FC BD3C 4567  70C8 8C71 8D3B 5072 E1F5
+uid           [ unknown] MySQL Release Engineering <mysql-build@oss.oracle.com>
+
+/etc/apt/sources.list.d/mysql.list 
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out entries below, but any other modifications may be lost.
+# Use command 'dpkg-reconfigure mysql-apt-config' as root for modifications.
+deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-apt-config
+deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-5.7
+deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-tools
+#deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-tools-preview
+deb-src http://repo.mysql.com/apt/ubuntu/ bionic mysql-5.7
