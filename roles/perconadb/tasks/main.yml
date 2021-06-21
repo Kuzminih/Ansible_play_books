@@ -1,0 +1,21 @@
+---
+- name: 'Install required repositories apt'
+  apt:
+    name:
+      - wget
+      - gnupg2
+      - lsb-release
+      - curl
+    state: present
+
+- name: 'get packages percona'
+  get_url:
+    url: https://repo.percona.com/apt/percona-release_latest.generic_all.deb
+    dest: /tmp/percona-release_latest.generic_all.deb
+
+- name: 'Install perconadb'
+  apt:
+    deb: /tmp/percona-release_latest.generic_all.deb
+    update_cache: yes
+
+# tasks file for roles/perconadb
