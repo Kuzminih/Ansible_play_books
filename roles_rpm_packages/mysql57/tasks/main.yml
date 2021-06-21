@@ -1,0 +1,31 @@
+---
+# tasks file for roles_rpm_packages/mysql57
+- name: 'Install required packages'
+  yum:
+    name:
+      - epel-release
+      - wget
+    state: present
+
+- name: 'Install packages for mysql 5.7'
+  yum:
+    name: https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+    state: present
+
+- name: 'Repositories edit mysql57'
+  shell: yum-config-manager --disable mysql80-community && yum-config-manager --enable mysql57-community
+#  enablerepo: mysql57-community=enable
+#  disablerepo: mysql80-community=disable
+
+- name: 'Install mysql57'
+  yum:
+    name:
+      - mysql-community-server
+      - mysql-community-client
+    state: present
+
+- name: 'systemd started-enabled'
+  systemd:
+    name: mysqld
+    enabled: yes
+    state: started

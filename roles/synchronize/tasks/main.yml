@@ -1,0 +1,22 @@
+---
+# tasks file for roles/synchronize
+- name: 'Check files'
+  stat:
+    path: {{ src_site_files }}index.php
+  register: index_exist
+
+- name: 'Synchronization site files'
+  synchronize:
+    src: {{ from_host }}{{ src_site_files }}
+    dest: {{ target_host }}{{ dest_site_files }}
+    dirs: yes
+  when: not index_exist.stat.exist
+
+- name: 'Synchronization config files web server'
+  synchronize:
+    src: {{ from_host }}/etc/nginx/conf.d
+    dest: {{ target_host }}/etc/nginx/conf.d
+    dirs: yes
+
+- name: 'Synchronization php config files'
+  synchronize:

@@ -1,0 +1,16 @@
+---
+- name: 'Install Nginx'
+  hosts: web
+  roles:
+    - nginx
+    - remi-php-fpm71
+    - ../roles/synchronize
+#    - php-fpm74
+#    - memcached
+#    - mysql57
+#    - geerlingguy.mysql
+    - perconadb
+    - redis
+#    - email_queue
+#    - itsumma_main_queue
+#    - crontab(templates)

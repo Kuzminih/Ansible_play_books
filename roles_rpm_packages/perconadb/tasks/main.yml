@@ -1,0 +1,6 @@
+---
+# tasks file for roles_rpm_packages/perconadb
+- name: 'Install percona'
+   yum:
+     name: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+

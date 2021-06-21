@@ -1,0 +1,26 @@
+---
+# tasks file for roles_rpm_packages/remi-php-fpm71
+- name: 'install required packages'
+  yum:
+    name:
+      - wget
+      - epel-release
+      - http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+      - yum-utils
+    state: present
+    update_cache: yes
+
+- name: 'repo config'
+  shell: yum-config-manager --enable remi-php71
+
+- name: 'Insatll php-fpm from remi repository'
+  yum:
+    name:
+      - php71-php-fpm
+      - php71
+
+- name: 'systemd started-enabled'
+  systemd:
+    name: php-71-php-fpm
+    enabled: yes
+    state: started
