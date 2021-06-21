@@ -30,8 +30,6 @@
     dirs: yes
     checksum: yes
 
-
-
 - name: 'Synchronization php config files'
   synchronize:
     src: '{{ from_host }}/etc/opt/remi/php71/'
@@ -42,7 +40,6 @@
 
 - name: 'Synchronization php config files'
   synchronize:
-<<<<<<< HEAD
     src: '{{ from_host }}/etc/opt/remi/php74/'
     dest: '{{ target_host }}/etc/opt/remi/php74/'
     checksum: yes
@@ -54,16 +51,9 @@
     src: '{{ from_host }}/etc/redis.conf'
     dest: '{{ target_host }}/etc/redis.conf'
     checksum: yes
-=======
-      src: '{{ from_host }}/etc/redis.conf'
-    dest: '{{ target_host }}/etc/redis.conf'
->>>>>>> 221e08b7993d0a4a4170b0a9a8217579549f6e6d
 
 - name: 'Synchronization config files mysql'
   synchronize:
     src: '{{ from_host }}/etc/my.cnf'
     dest: '{{ target_host }}/etc/mycnf.d'
-<<<<<<< HEAD
     checksum: yes
-=======
->>>>>>> 221e08b7993d0a4a4170b0a9a8217579549f6e6d
