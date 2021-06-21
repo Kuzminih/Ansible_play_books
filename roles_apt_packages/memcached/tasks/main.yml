@@ -1,15 +1,14 @@
 ---
+# tasks file for roles/memcached
 - name: 'install memcached'
-  apt:
+  yum:
     update_cache: yes
     name:
       - memcached
-      - libmemcached-tools
     state: present
 
-- name: 'restart memcached'  
-  systemd: 
+- name: 'restart memcached'
+  systemd:
     state: started
     enabled: yes
     name: memcached
-# tasks file for roles/memcached

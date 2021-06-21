@@ -1,22 +1,61 @@
 ---
 # tasks file for roles/synchronize
-- name: 'Check files'
+- name: 'Check files site'
   stat:
-    path: {{ src_site_files }}index.php
+    path: '{{ src_site_files }}index.php'
   register: index_exist
+
+- name: 'chech php71-php-fpm'
+  stat:
+    path: '{{ from_host }}/etc/opt/remi/php71/'
+  register: php71_exist
+
+- name: 'chech php74-php-fpm'
+  stat:
+    path: '{{ from_host }}/etc/opt/remi/php74/'
+  register: php74_exist
 
 - name: 'Synchronization site files'
   synchronize:
-    src: {{ from_host }}{{ src_site_files }}
-    dest: {{ target_host }}{{ dest_site_files }}
+    src: '{{ from_host }}{{ src_site_files }}'
+    dest: '{{ target_host }}{{ dest_site_files }}'
     dirs: yes
-  when: not index_exist.stat.exist
+    checksum: yes
+  when: index_exist.stat.exist is not define
 
 - name: 'Synchronization config files web server'
   synchronize:
-    src: {{ from_host }}/etc/nginx/conf.d
-    dest: {{ target_host }}/etc/nginx/conf.d
+    src: '{{ from_host }}/etc/nginx/conf.d'
+    dest: '{{ target_host }}/etc/nginx/conf.d'
     dirs: yes
+    checksum: yes
+
+
 
 - name: 'Synchronization php config files'
   synchronize:
+    src: '{{ from_host }}/etc/opt/remi/php71/'
+    dest: '{{ target_host }}/etc/opt/remi/php71/'
+    checksum: yes
+    dirs: yes
+  when: php71_exist.stat.exists is define
+
+- name: 'Synchronization php config files'
+  synchronize:
+    src: '{{ from_host }}/etc/opt/remi/php74/'
+    dest: '{{ target_host }}/etc/opt/remi/php74/'
+    checksum: yes
+    dirs: yes
+  when: php74_exist.stat.exists is define
+
+- name: 'Synchronization redis config files'
+  synchronize:
+    src: '{{ from_host }}/etc/redis.conf'
+    dest: '{{ target_host }}/etc/redis.conf'
+    checksum: yes
+
+- name: 'Synchronization config files mysql'
+  synchronize:
+    src: '{{ from_host }}/etc/my.cnf'
+    dest: '{{ target_host }}/etc/mycnf.d'
+    checksum: yes
